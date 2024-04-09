@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Heading, Input, Table, Thead, Tbody, Tr, Th, Td, Menu, MenuButton, MenuList, MenuItem, IconButton, Stack, Container } from "@chakra-ui/react";
 import { FaEllipsisV, FaEdit, FaTrash, FaEnvelope } from "react-icons/fa";
 
@@ -11,6 +11,11 @@ const users = [
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    setSelectedUser(null);
+  }, [searchTerm]);
 
   const filteredUsers = users.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase()));
 
@@ -33,7 +38,7 @@ const Index = () => {
             <Th display={["none", "table-cell"]} whiteSpace="nowrap">
               Session Index
             </Th>
-            <Th>Actions</Th>
+            <Th display={["none", "table-cell"]}>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -47,20 +52,31 @@ const Index = () => {
               <Td display={["none", "table-cell"]} whiteSpace="nowrap">
                 {user.sessionIndex}
               </Td>
-              <Td textAlign="right" display={["table-cell", "table-cell"]} px={[0, 4]}>
-                <Menu>
-                  <MenuButton as={IconButton} aria-label="Options" icon={<FaEllipsisV />} variant="outline" size="sm" />
-                  <MenuList>
-                    <MenuItem icon={<FaEdit />}>Edit</MenuItem>
-                    <MenuItem icon={<FaTrash />}>Delete</MenuItem>
-                    <MenuItem icon={<FaEnvelope />}>Send Email</MenuItem>
-                  </MenuList>
-                </Menu>
+              <Td textAlign="right" display={["none", "table-cell"]} px={4}>
+                <IconButton aria-label="Options" icon={<FaEllipsisV />} variant="outline" size="sm" onClick={() => setSelectedUser(user)} />
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
+      {selectedUser && (
+        <Box display={["block", "none"]} position="fixed" bottom={4} left={0} right={0} textAlign="center">
+          <Menu>
+            <MenuButton as={IconButton} aria-label="Options" icon={<FaEllipsisV />} variant="outline" />
+            <MenuList>
+              <MenuItem icon={<FaEdit />} onClick={() => console.log(`Edit ${selectedUser.name}`)}>
+                Edit
+              </MenuItem>
+              <MenuItem icon={<FaTrash />} onClick={() => console.log(`Delete ${selectedUser.name}`)}>
+                Delete
+              </MenuItem>
+              <MenuItem icon={<FaEnvelope />} onClick={() => console.log(`Email ${selectedUser.email}`)}>
+                Send Email
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+      )}
     </Container>
   );
 };
