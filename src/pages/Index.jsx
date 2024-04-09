@@ -47,7 +47,7 @@ const Index = () => {
               <Td display={["none", "table-cell"]} whiteSpace="nowrap">
                 {user.sessionIndex}
               </Td>
-              <Td textAlign="right">
+              <Td textAlign="right" display={["table-cell", "table-cell"]} px={[0, 4]}>
                 <Menu>
                   <MenuButton as={IconButton} aria-label="Options" icon={<FaEllipsisV />} variant="outline" size="sm" />
                   <MenuList>
