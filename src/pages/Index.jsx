@@ -27,8 +27,12 @@ const Index = () => {
           <Tr>
             <Th whiteSpace="nowrap">Name</Th>
             <Th whiteSpace="nowrap">Email</Th>
-            <Th display={["none", "table-cell"]} whiteSpace="nowrap">Country</Th>
-            <Th display={["none", "table-cell"]} whiteSpace="nowrap">Session Index</Th>
+            <Th display={["none", "table-cell"]} whiteSpace="nowrap">
+              Country
+            </Th>
+            <Th display={["none", "table-cell"]} whiteSpace="nowrap">
+              Session Index
+            </Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -37,11 +41,15 @@ const Index = () => {
             <Tr key={user.id}>
               <Td whiteSpace="nowrap">{user.name}</Td>
               <Td whiteSpace="nowrap">{user.email}</Td>
-              <Td display={["none", "table-cell"]} whiteSpace="nowrap">{user.country}</Td>
-              <Td display={["none", "table-cell"]} whiteSpace="nowrap">{user.sessionIndex}</Td>
-              <Td>
+              <Td display={["none", "table-cell"]} whiteSpace="nowrap">
+                {user.country}
+              </Td>
+              <Td display={["none", "table-cell"]} whiteSpace="nowrap">
+                {user.sessionIndex}
+              </Td>
+              <Td textAlign="right">
                 <Menu>
-                  <MenuButton as={IconButton} aria-label="Options" icon={<FaEllipsisV />} variant="outline" />
+                  <MenuButton as={IconButton} aria-label="Options" icon={<FaEllipsisV />} variant="outline" size="sm" />
                   <MenuList>
                     <MenuItem icon={<FaEdit />}>Edit</MenuItem>
                     <MenuItem icon={<FaTrash />}>Delete</MenuItem>
